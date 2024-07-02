@@ -8,8 +8,6 @@ import {
   Order,
 } from '../dto';
 import { NotFoundException, BadRequestException } from '@nestjs/common';
-import * as fs from 'fs';
-import * as path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 
 describe('ProductService', () => {
@@ -28,9 +26,31 @@ describe('ProductService', () => {
       updated_at: new Date(),
       deleted: false,
     },
+    {
+      id: uuidv4(),
+      name: 'Second Product',
+      description: 'Second Product Description',
+      price: 100,
+      quantity: 10,
+      sold: 2,
+      pending_orders: 0,
+      created_at: new Date(),
+      updated_at: new Date(),
+      deleted: false,
+    },
+    {
+      id: uuidv4(),
+      name: 'Third Product',
+      description: 'Third Product Description',
+      price: 75,
+      quantity: 15,
+      sold: 3,
+      pending_orders: 0,
+      created_at: new Date(),
+      updated_at: new Date(),
+      deleted: false,
+    },
   ];
-
-  const dataPath = path.join(__dirname, '../../data/products.json');
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -39,8 +59,7 @@ describe('ProductService', () => {
 
     service = module.get<ProductService>(ProductService);
 
-    // Reset the products array
-    fs.writeFileSync(dataPath, JSON.stringify(initialProducts, null, 2));
+    // Initialize the products array directly
     service['products'] = JSON.parse(JSON.stringify(initialProducts));
   });
 
@@ -85,12 +104,11 @@ describe('ProductService', () => {
     );
   });
 
-  it('should find paginated products', () => {
-    const paginationInput: PaginationInput = { cursor: null, limit: 10 };
-    const result = service.findPaginated(paginationInput);
+  it('should find paginated products using default pagination inputs', () => {
+    const result = service.findPaginated();
     expect(result.products).toBeInstanceOf(Array);
-    expect(result.products.length).toBe(1);
-    expect(result.products[0].name).toBe('Initial Product');
+    expect(result.products.length).toBe(initialProducts.length);
+    expect(result.products[0].name).toBe('Third Product');
     expect(result.nextCursor).toBeNull();
   });
 
@@ -176,7 +194,7 @@ describe('ProductService', () => {
     const sortingInput: SortingInput = { field: 'price', order: Order.ASC };
     const result = service.findPaginated(paginationInput, sortingInput);
     expect(result.products).toBeInstanceOf(Array);
-    expect(result.products.length).toBe(1);
+    expect(result.products.length).toBe(3);
     expect(result.products[0].name).toBe('Initial Product');
     expect(result.nextCursor).toBeNull();
   });
