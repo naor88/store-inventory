@@ -15,6 +15,7 @@ This project is a home assignment task that implements a store inventory managem
 - [Running Tests](#running-tests)
 - [GraphQL Playground](#graphql-playground)
 - [Additional Information](#additional-information)
+- [Screenshots](#screenshots)
 - [Suggestions for Further Improvement](#suggestions-for-further-improvement)
 - [Useful Links](#useful-links)
 
@@ -188,6 +189,32 @@ Ensure you have the following installed:
 
 - **Class Validator**: Used for validating input data to ensure data integrity.
 - **Soft Delete Approach**: Chosen to keep historical data and manage product states without permanent loss. Soft-deleted products are filtered out in queries and pagination.
+
+## Screenshots
+
+### Create Product
+
+![Create Product](docs/create-product.png)
+
+### Update Product
+
+![Update Product](docs/update-product.png)
+
+### Delete Product
+
+![Delete Product](docs/remove-product.png)
+
+### Low Cost
+
+![Low Cost](docs/low-cost.png)
+
+### Most Popular
+
+![Most Popular](docs/most-popular.png)
+
+### Query Products
+
+![Query Products](docs/query-products.png)
 
 ## Suggestions for Further Improvement
 
