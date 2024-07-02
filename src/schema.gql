@@ -1,0 +1,70 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Product {
+  id: String!
+  name: String!
+  description: String!
+  price: Float!
+  quantity: Float!
+  sold: Float!
+  pending_orders: Float!
+  deleted: Boolean!
+  created_at: DateTime!
+  updated_at: DateTime!
+}
+
+type PaginatedProducts {
+  products: [Product!]!
+  nextCursor: String
+}
+
+"""DateTime custom scalar type"""
+scalar DateTime
+
+type Query {
+  findPaginatedProducts(paginationInput: PaginationInput, sortingInput: SortingInput, filterInput: FilterInput): PaginatedProducts!
+  product(id: String!): Product!
+  findLowStock(threshold: Float! = 10): [Product!]!
+  mostPopularProducts(top_x_items: Float! = 3): [Product!]!
+}
+
+input PaginationInput {
+  cursor: String
+  limit: Float = 10
+}
+
+input SortingInput {
+  field: String
+  order: String
+}
+
+input FilterInput {
+  query: String!
+}
+
+type Mutation {
+  createProduct(createProductInput: CreateProductInput!): Product!
+  updateProduct(updateProductInput: UpdateProductInput!): Product!
+  removeProduct(id: String!): Boolean!
+}
+
+input CreateProductInput {
+  name: String!
+  description: String!
+  price: Float!
+  quantity: Float!
+  sold: Float!
+  pending_orders: Float!
+}
+
+input UpdateProductInput {
+  name: String
+  description: String
+  price: Float
+  quantity: Float
+  sold: Float
+  pending_orders: Float
+  id: String!
+}

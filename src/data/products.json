@@ -1,0 +1,14 @@
+[
+  {
+    "id": "5c5eea92-d987-4749-9875-700f2ea35401",
+    "name": "Initial Product",
+    "description": "Initial Product Description",
+    "price": 50,
+    "quantity": 20,
+    "sold": 5,
+    "pending_orders": 0,
+    "created_at": "2024-07-02T11:38:12.119Z",
+    "updated_at": "2024-07-02T11:38:12.119Z",
+    "deleted": false
+  }
+]
